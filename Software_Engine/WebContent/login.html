@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0086)https://passport.zhihuishu.com/login?service=http://online.zhihuishu.com/onlineSchool/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="智慧树是全球知名的学分课程服务平台，在线教育平台拥有海量大学高品质课程，网络教育在线完美支持跨校授课，学分认证，名师名课名校，在线互动教育学堂，体验VIP级课程学习，让你成为学堂中的MVP。">
+<title>智慧树在线教育_全球知名的学分课服务平台</title>
+<link href="https://assets.zhihuishu.com/icon/favicon.ico" rel="shortcut icon">
+<link href="./智慧树在线教育_全球知名的学分课服务平台_files/base.css" rel="stylesheet" type="text/css">
+<link href="./智慧树在线教育_全球知名的学分课服务平台_files/wall.css" rel="stylesheet" type="text/css">
+<script src="./智慧树在线教育_全球知名的学分课服务平台_files/jquery.min.js.下载" type="text/javascript"></script>
+<script src="./智慧树在线教育_全球知名的学分课服务平台_files/three.min.js.下载" type="text/javascript"></script>
+<script src="./智慧树在线教育_全球知名的学分课服务平台_files/layer.js.下载" type="text/javascript"></script><link rel="stylesheet" href="./智慧树在线教育_全球知名的学分课服务平台_files/layer.css" id="layuicss-skinlayercss">
+<script type="text/javascript" src="./智慧树在线教育_全球知名的学分课服务平台_files/sign_up.js.下载"></script>
+<script type="text/javascript" src="./智慧树在线教育_全球知名的学分课服务平台_files/find_pwd.js.下载"></script>
+ <script>
+     
+        window.addEventListener('load',function(){
+             
+            var form = document.forms[0];
+ 
+            form.addEventListener('submit',function(e){
+             
+                e.preventDefault();
+                 
+                var username = form.username.value;
+                var password = form.password.value;
+                 
+                var userInfo = JSON.parse(localStorage.getItem(username));
+                 
+                if(userInfo && userInfo.password === password)
+                     window.open("index.html","_self"); 
+                 else
+                 { alert('登录失败 请先注册!');}
+            });
+             
+            document.getElementsByTagName('button')[0].addEventListener('click',function(e){
+                 
+                e.preventDefault();
+                 
+                location.href = 'regist.html';
+                 
+            });
+        });
+         
+    </script>
+</head>
+<body class="wall-body">
+	<form action="#">
+
+<div class="wall-warp">
+		<div class="wall-main">
+			<div class="wall-icon wall-logo"></div>
+			<div class="switch-nav">
+				<a href="D:/Course/soft/login.html" id="qSignin" class="cur">登录</a>
+				<a href="D:/Course/soft/regist.html" id="qSignup">注册</a>
+				<span class="cur-border-bottom"></span>
+			</div>
+			<!--登录-->
+			<div class="switch-wrap switch-wrap-signin active">
+				<ul class="wall-form-ipt-list">
+					<li>
+						<input type="text" placeholder="请输入学号" value="" onfocus="hideErrorInfo(&#39;form-ipt-error-l-username&#39;);" name="username" id="lUsername" >
+						<label class="form-ipt-error" id="form-ipt-error-l-username">学号不能为空</label>
+					</li>
+					<li>
+						<input type="password" placeholder="密码" value="" name="password" onfocus="hideErrorInfo(&#39;form-ipt-error-l-password&#39;);" id="lPassword" >
+						<label class="form-ipt-error" id="form-ipt-error-l-password">密码不能为空</label>
+					</li>
+				</ul>
+				<input type="submit" class="wall-sub-btn" value="登录">
+               </div>
+           </div>
+
+ 
+<script src="./智慧树在线教育_全球知名的学分课服务平台_files/wallbgcanvas.js.下载" type="text/javascript"></script><div id="wall-bg"><span></span><canvas width="1362" height="909" style="width: 1362px; height: 909px;"></canvas></div>
+	
+</body></html>
