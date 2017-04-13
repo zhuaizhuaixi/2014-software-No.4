@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!-- 允许动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <!-- 开发模式，便于调试 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 配置文件修改了，不需要重启服务器-->
+    <constant name="struts.configuration.xml.reload" value="true" />
+    <!-- jsp中不使用struts的样式 -->
+    <constant name="struts.ui.theme" value="simple" />
+    <!-- Action所在的包的后缀 -->
+    <constant name="struts.convention.package.locators" value="action,actions,struts,struts2"/>
+
+    <package name="fund" extends="struts-default">
+		<!-- 使用通配符简化配置 -->
+        <!-- Add acttion here -->
+        <!-- 用于链接请求 -->
+         <action name="login" class = "com.se.controller.loginAction"  method="login">
+        	<result name="success" >index.html</result>
+        	<result name="input">login.html</result>
+        </action>
+
+       <action name="*">
+              <result name = "success">/fund/fund_{1}.jsp</result>
+       </action>
+    </package>
+
+<!--<include file="example.xml"/> -->
+
+    <!-- Add packages here -->
+
+</struts>

@@ -31,7 +31,7 @@
                 if(userInfo && userInfo.password === password)
                      window.open("index.html","_self"); 
                  else
-                 { alert('登录失败 请先注册!');}
+                 { alert('登录失败 请检查学号密码!');}
             });
              
             document.getElementsByTagName('button')[0].addEventListener('click',function(e){
@@ -46,7 +46,7 @@
     </script>
 </head>
 <body class="wall-body">
-<form action="login" method="post">
+<form name="form1" action="login.action" method="post" >
 
 <div class="wall-warp">
 		<div class="wall-main">
@@ -60,7 +60,7 @@
 			<div class="switch-wrap switch-wrap-signin active">
 				<ul class="wall-form-ipt-list">
 					<li>
-						<input type="text" placeholder="请输入学号" value="" onfocus="hideErrorInfo(&#39;form-ipt-error-l-username&#39;);" name="username" id="lUsername" >
+						<input type="text" placeholder="请输入学号" value=""  name="username" onfocus="hideErrorInfo(&#39;form-ipt-error-l-username&#39;);"id="lUsername" >
 						<label class="form-ipt-error" id="form-ipt-error-l-username">学号不能为空</label>
 					</li>
 					<li>
