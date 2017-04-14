@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>CSS Zen Garden: The Beauty of CSS Design</title>
+	<title>课程网站平台</title>
 
 	<link rel="stylesheet" media="screen" href="style.css?v=8may2013">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.csszengarden.com/zengarden.xml">
@@ -45,17 +46,17 @@
 		<div class="explanation" id="zen-explanation" role="article">
 			<tr>
     
-    <td valign="top" ><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2" style="background-image:url(content-bg.gif)">
+    <td valign="top" ><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2" style="background-image:url(picture/content-bg.gif)">
       <tbody><tr>
-      	<td width="17" valign="top"><img src="left-top-right.gif" width="17" height="29"></td>
+      	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
         <td height="31"><div class="titlebt">首页</div></td>
-         <td width="16" valign="top" ><img src="nav-right-bg.gif" width="16" height="29"></td>
+         <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="16" height="29"></td>
       </tr>
     </tbody></table>
     </td>
     
   </tr>
-			<p>There is a continuing need to show the power of <abbr title="Cascading Style Sheets">CSS</abbr>. The Zen Garden aims to excite, inspire, and encourage participation. To begin, view some of the existing designs in the list. Clicking on any one will load the style sheet into this very page. The <abbr title="HyperText Markup Language">HTML</abbr> remains the same, the only thing that has changed is the external <abbr title="Cascading Style Sheets">CSS</abbr> file. Yes, really.</p>
+		<p>There is a continuing need to show the power of <abbr title="Cascading Style Sheets">CSS</abbr>. The Zen Garden aims to excite, inspire, and encourage participation. To begin, view some of the existing designs in the list. Clicking on any one will load the style sheet into this very page. The <abbr title="HyperText Markup Language">HTML</abbr> remains the same, the only thing that has changed is the external <abbr title="Cascading Style Sheets">CSS</abbr> file. Yes, really.</p>
 			<p><abbr title="Cascading Style Sheets">CSS</abbr> allows complete and total control over the style of a hypertext document. The only way this can be illustrated in a way that gets people excited is by demonstrating what it can truly be, once the reins are placed in the hands of those able to create beauty from structure. Designers and coders alike have contributed to the beauty of the web; we can always push it further.</p>
 		</div>
 

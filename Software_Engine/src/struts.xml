@@ -20,8 +20,8 @@
         <!-- Add acttion here -->
         <!-- 用于链接请求 -->
          <action name="login" class = "com.se.controller.loginAction"  method="login">
-        	<result name="success" >index.html</result>
-        	<result name="input">login.html</result>
+        	<result name="success" >index.jsp</result>
+        	<result name="input">login.jsp</result>
         </action>
 
        <action name="*">
