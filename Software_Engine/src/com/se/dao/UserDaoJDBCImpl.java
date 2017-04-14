@@ -12,13 +12,13 @@ public class UserDaoJDBCImpl implements UserDao {
 	private PreparedStatement pstmt=null;
 	private ResultSet rs=null;
 	@Override
-	public boolean validate(String userName, String password) {
+	public boolean validate(String userName, String password,String radio) {
 		// TODO Auto-generated method stub
 		boolean flag=false;
 		//1. 获取连接
 		conn=JDBCUtil.getConnection();
 		//2. 写Sql语句
-		String sql="select * from student where id=? and password=?";
+		String sql="select * from "+radio+" where id=? and password=?";
 		//3. 创建PreparedStatement对象
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -26,6 +26,7 @@ public class UserDaoJDBCImpl implements UserDao {
 			pstmt.setString(1, userName);
 			pstmt.setString(2, password);
 		//5. 发送执行sql语句
+			System.out.print(pstmt.toString());
 			rs=pstmt.executeQuery();
 		//6.对ResultSet对象处理
 			if (rs.next()) {

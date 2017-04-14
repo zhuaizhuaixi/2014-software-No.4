@@ -11,6 +11,16 @@ public class loginAction extends ActionSupport {
 
 	private String username;
 	private String password;
+	private String radio;
+	
+
+	
+	public String getRadio() {
+		return radio;
+	}
+	public void setRadio(String radio) {
+		this.radio = radio;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -29,9 +39,11 @@ public class loginAction extends ActionSupport {
 		ActionContext ctx = ActionContext.getContext();
 		
 		//2. 创建dao或者service对象
+		if(radio.compareTo("on")==0)
+			radio="student";
 		UserDao userDao=new UserDaoJDBCImpl();
-		boolean flag=userDao.validate(username, password);
-		System.out.println(username+password);
+		boolean flag=userDao.validate(username, password,radio);
+		System.out.println(username+password+radio);
 		
 		
 		if(flag)
