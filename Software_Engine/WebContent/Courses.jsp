@@ -70,19 +70,24 @@
     </tr>
     <%
 			String status;
+           String sss;
 			String[] str= (String[]) request.getAttribute("list"); //important!
 			for(int i=0;i<str.length;i++)
 			{
 				if(str[i]!=null)
-				System.out.print(str[i]+" ");
+				{
+					sss=str[i];
+			%>
+			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a><br/>
+			<%
+				}
 			}
 		%>
 
 <a href="upload.jsp" class="button grey">上传课件</a>
 
-<form action="download.action" method="post">
-			<input type="submit" value="路由器IP.txt"/>
-</form>
+
+
 <!--页脚-->
 		<footer>
 		
