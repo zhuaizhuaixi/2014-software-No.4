@@ -19,16 +19,16 @@ public class showfileAction extends ActionSupport {
 		  File file=new File(path);
 		  String[] filelist = new String[100];
 		  File[] tempList = file.listFiles();
-		  System.out.println("该目录下对象个数："+tempList.length);
+		  System.out.println("璇ョ洰褰曚笅瀵硅薄涓暟锛�"+tempList.length);
 		  for (int i = 0; i < tempList.length; i++) {
 		   if (tempList[i].isFile()) {
 			   str=tempList[i].toString();
 			   str=str.replace(path+"\\", "");
 			   filelist[i]=str;
-		    System.out.println("文     件："+str);
+		    System.out.println("鏂�     浠讹細"+str);
 		   }
 		  }
-		  
+		  System.out.println(path);
 		  request.put("list",filelist);
 		  return SUCCESS;
 	}

@@ -59,7 +59,7 @@
         <td height="31" width="130"><div class="titlebt"><a href="index.jsp"><font color="#00AEAE">首页</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="show.action">学生名单</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showfile.action">查看课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="Teacher.jsp">教学大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach.action">教学大纲</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="Practice.jsp">习题问答</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="Experiment.jsp">教学实验</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
