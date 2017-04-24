@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -29,8 +28,8 @@
 		<!--个人信息-->
 
 
-
 <p>  欢迎您${sessionScope.username}!</p>
+
 
 		<!--日历-->
 		<div class="summary" id="calendar" role="article">
@@ -63,35 +62,21 @@
         <td height="31" width="130"><div class="titlebt"><a href="teach.action">教学大纲</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="practice.action">习题问答</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showexp.action">教学实验</a></div></td>
-        <td height="31" width="130" ><div class="titlebt" ><a href="showmessage.action">交流天地</a></div></td>
+         <td height="31" width="130" ><div class="titlebt" ><a href="showmessage.action">交流天地</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
       </tr>
     </tbody></table>
     </td>
     </tr>
-    <%
-           String sss;
-			String[] str= (String[]) request.getAttribute("list"); //important!
-			for(int i=0;i<str.length;i++)
-			{
-				if(str[i]!=null)
-				{
-					sss=str[i];
-			%>
-			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a>
-			<a href="deletefile?fileName=<%= i%>">删除</a><br/>
-			<%
-				}
-			}
-		%>
 
-<a href="upload.jsp" class="button grey">上传课件</a>
-
-
+	<form action="addexp.action" method="post">
+	实验标题<input type="text" name="experiment" /><br/>
+	实验要求<textarea  rows="16" cols="50"	name="requires"></textarea><br/>
+	<input type="submit" value="提交"/>
+	</form>
 
 <!--页脚-->
 		<footer>
-		
 			
 		</footer>
 
