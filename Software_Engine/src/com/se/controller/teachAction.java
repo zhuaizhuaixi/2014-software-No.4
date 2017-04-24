@@ -45,29 +45,6 @@ public class teachAction extends ActionSupport {
 		this.year = year;
 	}
 	private int year;
-	public String teach_stu() throws SQLException
-	{
-		List funds = new ArrayList<teach_prog>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from teaching_programme";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			teach_prog fund = new teach_prog();
-			fund.setId(rs.getInt("id"));
-			fund.setTitle(rs.getString("title"));
-			fund.setContent(rs.getString("content"));
-			fund.setYeaR(rs.getInt("year"));
-			fund.setTime(rs.getDate("time"));
-			funds.add(fund);
-		}
-		
-		ActionContext ctx = ActionContext.getContext();
-		Map request = (Map)ctx.get("request");
-		request.put("teachList", funds);// step 3
-		return "stu";
-	}
-	
 	public String teach() throws SQLException
 	{
 		List funds = new ArrayList<teach_prog>();
@@ -90,7 +67,6 @@ public class teachAction extends ActionSupport {
 		request.put("teachList", funds);// step 3
 		return SUCCESS;
 	}
-	
 	public String addteach() throws SQLException
 	{
 		Connection conn = JDBCUtil.getConnection();

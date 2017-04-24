@@ -17,7 +17,7 @@ import com.se.util.JDBCUtil;
  * Description: TODO
  * 
  * @author
- * @date 2017骞�2鏈�25鏃� 涓嬪崍3:05:25
+ * @date 2017年2月25日 下午3:05:25
  */
 public class StudentDaoJDBCImpl implements StudentDao {
 	private Connection conn = null;
@@ -61,7 +61,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
 			pstmt.setString(2, fund.getName());
 			pstmt.setString(3, fund.getPassword());
 			pstmt.setString(4, fund.getSex());
-			// 闇�瑕佹妸java.util.Date 杞负 java.sql.Date
+			// 需要把java.util.Date 转为 java.sql.Date
 			pstmt.setDate(5, new java.sql.Date(fund.getLast_login().getTime()));
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -150,7 +150,6 @@ public class StudentDaoJDBCImpl implements StudentDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, (pageNo-1)*pageSize);
 			pstmt.setInt(2, pageSize);
-			System.out.println(pstmt.toString());
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Student fund = new Student();

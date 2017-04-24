@@ -30,7 +30,7 @@
 
 
 
-<p>  欢迎您${sessionScope.username}!</p>
+
 
 		<!--日历-->
 		<div class="summary" id="calendar" role="article">
@@ -57,19 +57,19 @@
     <td valign="top" ><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2" style="background-image:url(picture/content-bg.gif)">
       <tbody><tr>
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
-               <td height="31" width="130"><div class="titlebt"><a href="index.jsp">首页</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="show.action"><font color="#00AEAE">学生名单</font></a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="showfile.action">查看课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="teach.action">教学大纲</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="practice.action">习题问答</a></div></td>
-        <td height="31" width="130" ><div class="titlebt" ><a href="showexp.action">教学实验</a></div></td>
-        <td height="31" width="130" ><div class="titlebt" ><a href="showmessage.action">交流天地</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="index.jsp">首页</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="show.action">学生名单</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="showfile.action"><font color="#00AEAE">查看课件</font></a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Teacher.jsp">教学大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Practice.jsp">习题问答</a></div></td>
+        <td height="31" width="130" ><div class="titlebt" ><a href="Experiment.jsp">教学实验</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
       </tr>
     </tbody></table>
     </td>
     </tr>
     <%
+			String status;
            String sss;
 			String[] str= (String[]) request.getAttribute("list"); //important!
 			for(int i=0;i<str.length;i++)
@@ -78,8 +78,7 @@
 				{
 					sss=str[i];
 			%>
-			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a>
-			<a href="deletefile?fileName=<%= i%>">删除</a><br/>
+			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a><br/>
 			<%
 				}
 			}

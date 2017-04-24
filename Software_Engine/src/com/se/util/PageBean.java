@@ -1,13 +1,13 @@
 package com.se.util;
 import java.util.List;
 public class PageBean {
-	public int curPage; // 褰撳墠椤电爜
-	public int maxPage; // 鎬荤殑椤垫暟
-	public int maxRowCount; // 鎬荤殑璁板綍鏁�
-	public int rowsPerPage=10; // 姣忛〉璁板綍鏁�
-	public List data ;    //姣忛〉闇�瑕佹樉绀虹殑鏁版嵁
+	public int curPage; // 当前页码
+	public int maxPage; // 总的页数
+	public int maxRowCount; // 总的记录数
+	public int rowsPerPage=10; // 每页记录数
+	public List data ;    //每页需要显示的数据
 	/**
-	* @Description: 鏍规嵁璁板綍鏁拌绠楅〉鏁�
+	* @Description: 根据记录数计算页数
 	* @param      
 	* @return void   
 	* @throws

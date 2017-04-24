@@ -20,17 +20,17 @@ public class FileDownloadAction extends ActionSupport{
     	String path=ServletActionContext.getServletContext().getRealPath("\\upload\\");
     	
     	
-    	String str;                           //鑾峰彇鏂囦欢澶逛腑鏂囦欢鍚嶇殑鏁扮粍
+    	String str;                           //获取文件夹中文件名的数组
     	  File file2=new File(path);
 		  String[] filelist = new String[100];
 		  File[] tempList = file2.listFiles();
-		  System.out.println("共有"+tempList.length);
+		  System.out.println("该目录下对象个数："+tempList.length);
 		  for (int i = 0; i < tempList.length; i++) {
 		   if (tempList[i].isFile()) {
 			   str=tempList[i].toString();
 			   str=str.replace(path+"\\", "");
 			   filelist[i]=str;
-		    System.out.println("是"+str);
+		    System.out.println("文     件："+str);
 		   }
 		  }
     	
@@ -48,7 +48,6 @@ public class FileDownloadAction extends ActionSupport{
     	
     	return SUCCESS;
     }
-	
 
 	public InputStream getFileInputStream() {
 		return fileInputStream;
