@@ -45,7 +45,6 @@
         	<result name="input">index.jsp</result>
         </action>
         
-<<<<<<< HEAD
         <action name="teach*" class = "com.se.controller.teachAction"  method="teach{1}">
         	<result name="success" >Teacher.jsp</result>
         	<result name="stu" >Teacher_stu.jsp</result>
@@ -57,23 +56,6 @@
         	<result name="input">index.jsp</result>
         </action>
           
-=======
-        <action name="teach" class = "com.se.controller.teachAction"  method="teach">
-        	<result name="success" >Teacher.jsp</result>
-        	<result name="input">index.jsp</result>
-        </action>
-        
-        <action name="addteach" class = "com.se.controller.teachAction"  method="addteach">
-        	<result name="success" type="chain">teach</result>
-        	<result name="input">index.jsp</result>
-        </action>
-        
-        <action name="deleteteach" class = "com.se.controller.teachAction"  method="deleteteach">
-        	<result name="success" type="chain">teach</result>
-        	<result name="input">index.jsp</result>
-        </action>
-        
->>>>>>> origin/struts2
         <action name="upload" class = "com.se.controller.uploadAction"  method="upload">
             <param name="savePath">/upload</param>
         	<result name="success"  type="chain">showfile</result>
