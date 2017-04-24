@@ -45,6 +45,7 @@ public class teachAction extends ActionSupport {
 		this.year = year;
 	}
 	private int year;
+<<<<<<< HEAD
 	public String teach_stu() throws SQLException
 	{
 		List funds = new ArrayList<teach_prog>();
@@ -68,6 +69,8 @@ public class teachAction extends ActionSupport {
 		return "stu";
 	}
 	
+=======
+>>>>>>> origin/struts2
 	public String teach() throws SQLException
 	{
 		List funds = new ArrayList<teach_prog>();
@@ -90,7 +93,10 @@ public class teachAction extends ActionSupport {
 		request.put("teachList", funds);// step 3
 		return SUCCESS;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/struts2
 	public String addteach() throws SQLException
 	{
 		Connection conn = JDBCUtil.getConnection();
