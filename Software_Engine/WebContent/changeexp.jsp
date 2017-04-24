@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
+<%@ page import="java.util.List,com.se.domain.experiment" %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -29,8 +29,8 @@
 		<!--个人信息-->
 
 
-
 <p>  欢迎您${sessionScope.username}!</p>
+
 
 		<!--日历-->
 		<div class="summary" id="calendar" role="article">
@@ -69,29 +69,16 @@
     </tbody></table>
     </td>
     </tr>
-    <%
-           String sss;
-			String[] str= (String[]) request.getAttribute("list"); //important!
-			for(int i=0;i<str.length;i++)
-			{
-				if(str[i]!=null)
-				{
-					sss=str[i];
-			%>
-			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a>
-			<a href="deletefile?fileName=<%= i%>">删除</a><br/>
-			<%
-				}
-			}
-		%>
-
-<a href="upload.jsp" class="button grey">上传课件</a>
-
-
+    <% experiment exp = (experiment)request.getAttribute("exp"); %>
+	<form action="updateexp.action" method="post">
+	实验标题<input type="text" name="experiment" value="<%=exp.getExperiment()%>"/><br/>
+	实验要求<textarea  rows="16" cols="50"	name="requires" ><%=exp.getRequires()%></textarea><br/>
+	<input type="hidden" name="expid" value="<%=exp.getId() %>"/>
+	<input type="submit" value="提交"/>
+	</form>
 
 <!--页脚-->
 		<footer>
-		
 			
 		</footer>
 

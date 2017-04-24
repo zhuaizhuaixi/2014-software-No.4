@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -29,8 +28,8 @@
 		<!--个人信息-->
 
 
-
 <p>  欢迎您${sessionScope.username}!</p>
+
 
 		<!--日历-->
 		<div class="summary" id="calendar" role="article">
@@ -69,29 +68,22 @@
     </tbody></table>
     </td>
     </tr>
-    <%
-           String sss;
-			String[] str= (String[]) request.getAttribute("list"); //important!
-			for(int i=0;i<str.length;i++)
-			{
-				if(str[i]!=null)
-				{
-					sss=str[i];
-			%>
-			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a>
-			<a href="deletefile?fileName=<%= i%>">删除</a><br/>
-			<%
-				}
-			}
-		%>
 
-<a href="upload.jsp" class="button grey">上传课件</a>
-
-
+	<form action="addpractice.action" method="post">
+	题目：<input type="text" name="subject" /><br/>
+	A选项：<input type="text" name="A" /><br/>
+	B选项：<input type="text" name="B" /><br/>
+	C选项：<input type="text" name="C" /><br/>
+	D选项：<input type="text" name="D" /><br/>
+	正确答案：<input type="radio" name="answer"  value="A" checked >A
+	<input type="radio" name="answer"  value="B"  >B
+	<input type="radio" name="answer"  value="C"  >C
+	<input type="radio" name="answer"  value="D"  >D
+	<input type="submit" value="提交"/>
+	</form>
 
 <!--页脚-->
 		<footer>
-		
 			
 		</footer>
 

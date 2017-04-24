@@ -20,8 +20,9 @@
         <!-- Add acttion here -->
         <!-- 用于链接请求 -->
          <action name="login" class = "com.se.controller.loginAction"  method="login">
-        	<result name="success" >index.jsp</result>
-        	<result name="input">login.jsp</result>
+        	<result name="teacher" >index.jsp</result>
+        	<result name="student">index_stu.jsp</result>
+        	<result name="input">login_fail.jsp</result>
         </action>
         
         <action name="show" class = "com.se.controller.showAction"  method="show">
@@ -29,8 +30,13 @@
         	<result name="input">index.jsp</result>
         </action>
         
-        <action name="showfile" class = "com.se.controller.showfileAction"  method="showfile">
+        <action name="showfile*" class = "com.se.controller.showfileAction"  method="showfile{1}">
         	<result name="success" >Courses.jsp</result>
+        	<result name="input">index.jsp</result>
+        	<result name="stu">Courses_stu.jsp</result>
+        </action>
+        <action name="deletefile" class = "com.se.controller.deletefileAction"  method="deletefile">
+        	<result name="success"  type="chain">showfile</result>
         	<result name="input">index.jsp</result>
         </action>
         
@@ -39,27 +45,46 @@
         	<result name="input">index.jsp</result>
         </action>
         
-        <action name="teach" class = "com.se.controller.teachAction"  method="teach">
+        <action name="teach*" class = "com.se.controller.teachAction"  method="teach{1}">
         	<result name="success" >Teacher.jsp</result>
+        	<result name="stu" >Teacher_stu.jsp</result>
         	<result name="input">index.jsp</result>
         </action>
         
-        <action name="addteach" class = "com.se.controller.teachAction"  method="addteach">
-        	<result name="success" type="chain">teach</result>
+        <action name="*teach" class = "com.se.controller.teachAction"  method="{1}teach">
+        	<result name="success" type="chain">teach</result> 	
         	<result name="input">index.jsp</result>
         </action>
-        
-        <action name="deleteteach" class = "com.se.controller.teachAction"  method="deleteteach">
-        	<result name="success" type="chain">teach</result>
-        	<result name="input">index.jsp</result>
-        </action>
-        
+          
         <action name="upload" class = "com.se.controller.uploadAction"  method="upload">
             <param name="savePath">/upload</param>
-        	<result name="success"  >index.jsp</result>
+        	<result name="success"  type="chain">showfile</result>
         	<result name="input">index.jsp</result>
         </action>
         
+        <action name="practice" class = "com.se.controller.practiceAction"  method="practice">
+        	<result name="success"  >Practice.jsp</result>
+        	<result name="input">index.jsp</result>
+        </action>
+        
+        <action name="*exp" class = "com.se.controller.expAction"  method="{1}">
+        	<result name="success">Experiment.jsp</result>
+        	<result name="show" type="chain">showexp</result>
+        	<result name="detail">exp_detail.jsp</result>
+        	<result name="report">report.jsp</result>
+        	<result name="changeexp">changeexp.jsp</result>
+        </action>
+        
+        <action name="*message" class = "com.se.controller.messageAction"  method="{1}">
+        	<result name="success">Message.jsp</result>
+        	<result name="show" type="chain">showmessage</result>
+        </action>
+        
+        <action name="*practice" class = "com.se.controller.practiceAction"  method="{1}practice">
+        	<result name="success"  type="chain">practice</result>
+        	<result name="input">index.jsp</result>
+        </action>
+             
           <action name="download" class="com.se.controller.FileDownloadAction">
                <result name="success" type="stream">
          　　    <param name="inputName">fileInputStream</param>
@@ -69,8 +94,10 @@
                </result>
            </action>
 
+      
+
        <action name="*">
-              <result name = "success">/fund/fund_{1}.jsp</result>
+              <result name = "success">error.jsp</result>
        </action>
     </package>
 
