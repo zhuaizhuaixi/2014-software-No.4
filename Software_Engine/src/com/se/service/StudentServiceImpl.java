@@ -7,7 +7,7 @@ import com.se.util.PageBean;
 public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao=new StudentDaoJDBCImpl();
 	@Override
-	public PageBean getFunds(int pageNo) {
+	public PageBean getStudents(int pageNo) {
 		// TODO Auto-generated method stub
 		PageBean pageBean=new PageBean();
 		pageBean.data=studentDao.findByPage(pageNo, pageBean.rowsPerPage);

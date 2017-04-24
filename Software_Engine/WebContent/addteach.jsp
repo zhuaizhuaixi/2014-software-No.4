@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -58,9 +57,9 @@
       <tbody><tr>
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
         <td height="31" width="130"><div class="titlebt"><a href="index.jsp">首页</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="show.action">学生名单</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="showfile.action"><font color="#00AEAE">查看课件</font></a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="Teacher.jsp">教学大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Student.jsp">学生名单</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Courses.jsp">查看课件</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Teacher.jsp"><font color="#00AEAE">教学大纲</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="Practice.jsp">习题问答</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="Experiment.jsp">教学实验</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
@@ -68,29 +67,16 @@
     </tbody></table>
     </td>
     </tr>
-    <%
-			String status;
-           String sss;
-			String[] str= (String[]) request.getAttribute("list"); //important!
-			for(int i=0;i<str.length;i++)
-			{
-				if(str[i]!=null)
-				{
-					sss=str[i];
-			%>
-			<a href="download.action?fileName=<%= i%>" ><%= str[i]%></a><br/>
-			<%
-				}
-			}
-		%>
 
-<a href="upload.jsp" class="button grey">上传课件</a>
-
-
+	<form action="addteach.action" method="post">
+	大纲标题<input type="text" name="title" /><br/>
+	大纲内容<textarea  rows="16" cols="50"	name="content"></textarea><br/>
+	大纲年份<input type="text" name ="year"/><br/>
+	<input type="submit" value="提交"/>
+	</form>
 
 <!--页脚-->
 		<footer>
-		
 			
 		</footer>
 

@@ -21,14 +21,10 @@ public class showAction extends ActionSupport {
 	}
 	public String show()
 	{
-		StudentService fundService=new StudentServiceImpl();
+		StudentService studentService=new StudentServiceImpl();
 		ActionContext ctx = ActionContext.getContext();
-//		int pageNo=1;
 		Map request = (Map)ctx.get("request");
-//		if(request.get("pageNo")!=null)
-	//		pageNo=Integer.parseInt((String)request.get("pageNo"));
-		//List<Fund> funds = fundDao.findAll(); // step 2
-		PageBean pageBean = fundService.getFunds(pageNo); // step 2
+		PageBean pageBean = studentService.getStudents(pageNo); // step 2
 		request.put("studentList", pageBean);// step 3
 		
 		return SUCCESS;
