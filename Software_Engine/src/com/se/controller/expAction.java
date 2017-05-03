@@ -26,6 +26,15 @@ public class expAction extends ActionSupport {
 	private String requires;
 	private int reportid;
 	private int mark;
+	private int stu_id;
+	public int getStu_id() {
+		return stu_id;
+	}
+
+	public void setStu_id(int stu_id) {
+		this.stu_id = stu_id;
+	}
+
 	public int getReportid() {
 		return reportid;
 	}
@@ -86,6 +95,26 @@ public class expAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String show_stu() throws SQLException
+	{
+		List funds = new ArrayList<experiment>();
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "select * from experiment";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			experiment fund = new experiment();
+			fund.setId(rs.getInt("id"));
+			fund.setExperiment(rs.getString("experiment"));
+			fund.setRequires(rs.getString("requires"));
+			funds.add(fund);
+		}
+		ActionContext ctx = ActionContext.getContext();
+		Map request = (Map)ctx.get("request");
+		request.put("expList", funds);// step 3
+		return "stu_show";
+	}
+	
 	public String detail() throws SQLException
 	{
 		String expname="";
@@ -123,6 +152,44 @@ public class expAction extends ActionSupport {
 		request.put("requires",expreq);	
 		return "detail";
 	}
+	
+	public String detail_stu() throws SQLException
+	{
+		String expname="";
+		String expreq="";
+		int flag=0;
+		Connection conn = JDBCUtil.getConnection();
+		String sql ;
+		PreparedStatement pstmt ;
+		ResultSet rs ;
+		sql="select experiment,requires from experiment where id=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, detail_id);
+		rs = pstmt.executeQuery();
+		while(rs.next())
+		{
+			expname=rs.getString("experiment");
+			expreq=rs.getString("requires");
+		}
+		
+		sql="select * from report where student=? and expid=?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, stu_id);
+		pstmt.setInt(2, detail_id);
+		rs = pstmt.executeQuery();
+		if(rs.next())
+			flag=1;
+		
+		ActionContext ctx = ActionContext.getContext();
+		Map request = (Map)ctx.get("request");
+		request.put("id", detail_id);
+		request.put("experiment", expname);
+		request.put("requires",expreq);	
+		request.put("flag", flag);
+		return "detail_stu";
+	}
+	
+	
 	public String add() throws SQLException
 	{
 		Connection conn = JDBCUtil.getConnection();

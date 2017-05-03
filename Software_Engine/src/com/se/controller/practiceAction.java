@@ -12,10 +12,46 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.se.domain.practice;
+import com.se.domain.result;
 import com.se.util.JDBCUtil;
 
 public class practiceAction extends ActionSupport {
 	private String subject;
+	private int [] exid= new int[15];
+	public int[] getExid() {
+		return exid;
+	}
+
+	public void setExid(int[] exid) {
+		this.exid = exid;
+	}
+	private String [] question = new String[15];
+	private String [] no = new String[15];
+	private String [] as = new String[15];
+	public String[] getNo() {
+		return no;
+	}
+
+	public String[] getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String[] question) {
+		this.question = question;
+	}
+
+	public void setNo(String[] no) {
+		this.no = no;
+	}
+
+	public String[] getAs() {
+		return as;
+	}
+
+	public void setAs(String[] as) {
+		this.as = as;
+	}
+
 	private String A;
 	private String B;
 	private String C;
@@ -79,6 +115,77 @@ public class practiceAction extends ActionSupport {
 		pstmt.setInt(1, deleteid);
 		pstmt.executeUpdate();
 		return SUCCESS;
+	}
+	
+	public String showpractice_stu() throws SQLException
+	{
+		List funds = new ArrayList<practice>();
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "select * from exercises order by rand() limit 0,10;";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			practice fund = new practice();
+			fund.setId(rs.getInt("id"));
+			fund.setSubject(rs.getString("subject"));
+			fund.setA(rs.getString("A"));
+			fund.setB(rs.getString("B"));
+			fund.setC(rs.getString("C"));
+			fund.setD(rs.getString("D"));
+			fund.setAnswer(rs.getString("answer"));
+			funds.add(fund);
+		}
+		
+		ActionContext ctx = ActionContext.getContext();
+		Map request = (Map)ctx.get("request");
+		request.put("practList", funds);// step 3
+		return "practice_stu";
+	}
+	
+	public String practice_stu_result() throws SQLException
+	{
+		List results = new ArrayList<result>();
+		Connection conn = JDBCUtil.getConnection();
+		String sql;
+		PreparedStatement pstmt;
+		ResultSet rs;
+		int i,sum=0;
+		for(i=1;i<=10;i++)
+		{
+			result res=new result();
+			sql = "select * from exercises where id=? and answer=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, exid[i]);
+			pstmt.setString(2, no[i]);
+			rs= pstmt.executeQuery();
+			if(rs.next())
+				sum++;
+			else
+			{
+				sql = "select * from exercises where id=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, exid[i]);
+				rs= pstmt.executeQuery();
+				rs.next();
+				
+				
+				res.setExid(exid[i]);
+				res.setQuestion(question[i]);
+				res.setChoose_id(no[i]);
+				res.setChoose_text(rs.getString(no[i]));
+				res.setRight_id(as[i]);
+				res.setRight_text(rs.getString(as[i]));
+				
+				results.add(res);
+			}
+		}
+		System.out.println(sum);
+		
+		ActionContext ctx = ActionContext.getContext();
+		Map request = (Map)ctx.get("request");
+		request.put("mark", sum);
+		request.put("result", results);
+		return "stu_result";
 	}
 
 	public String getSubject() {

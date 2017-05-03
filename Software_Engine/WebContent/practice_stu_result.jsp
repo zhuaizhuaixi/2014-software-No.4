@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.util.List,com.se.domain.teach_prog"%>
+<%@page import="java.util.List,com.se.domain.result"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -61,8 +61,8 @@
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
         <td height="31" width="130"><div class="titlebt"><a href="index_stu.jsp">首页</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showfile_stu.action">下载课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action"><font color="#00AEAE">查看大纲</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="Practice_stu.jsp">习题训练</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action">查看大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Practice_stu.jsp"><font color="#00AEAE">习题训练</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action">教学实验</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showmessage_stu.action">交流天地</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
@@ -70,22 +70,38 @@
     </tbody></table>
     </td>
     </tr>
-    
-    <%
-			List<teach_prog> students =(List<teach_prog>) request.getAttribute("teachList"); //important!
-			for (teach_prog student : students) {
-				
-		%>
-			大纲标题：<%=student.getTitle()%><br/>
-			大纲内容：<br/>
-			<%=student.getContent()%><br/>
-			大纲年份：<%=student.getYeaR()%><br/>
-			上传时间：<%=student.getTime()%><br/><br/>
 
-		<%
-			}
-		%>
- 		
+
+			<% 
+				List<result> results =(List<result>) request.getAttribute("result");
+			    int sum =(int) request.getAttribute("mark");
+			%>
+			
+			
+			<% if(sum==10) 
+				{
+			%>
+			
+					<p>你答对了全部题目！</p>
+			<% 
+				}
+			else
+			{
+			%>
+			本次练习共10题，其中答对<%= sum %>题，答错<%= 10-sum %>题，错题如下：<br/>
+			<%
+			int i=1;
+			for(result rs : results)
+			{
+				
+			%>
+   				<%= i++%>、题目:<%=rs.getQuestion() %><br/>
+   				你选的是：<%=rs.getChoose_id() %> : <%=rs.getChoose_text() %><br/>
+   				正确答案是：<%=rs.getRight_id() %> : <%=rs.getRight_text() %><br/><br/>
+ 	
+   			<%
+   				}}
+   			%>
 <!--页脚-->
 		<footer>
 			

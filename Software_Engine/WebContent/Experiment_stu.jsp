@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.util.List,com.se.domain.teach_prog"%>
+<%@page import="java.util.List,com.se.domain.experiment"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -61,31 +61,27 @@
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
         <td height="31" width="130"><div class="titlebt"><a href="index_stu.jsp">首页</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showfile_stu.action">下载课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action"><font color="#00AEAE">查看大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action">查看大纲</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="Practice_stu.jsp">习题训练</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action">教学实验</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action"><font color="#00AEAE">教学实验</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showmessage_stu.action">交流天地</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
       </tr>
     </tbody></table>
     </td>
     </tr>
-    
-    <%
-			List<teach_prog> students =(List<teach_prog>) request.getAttribute("teachList"); //important!
-			for (teach_prog student : students) {
+
+       <%
+			List<experiment> students =(List<experiment>) request.getAttribute("expList"); //important!
+			for (experiment student : students) {
 				
 		%>
-			大纲标题：<%=student.getTitle()%><br/>
-			大纲内容：<br/>
-			<%=student.getContent()%><br/>
-			大纲年份：<%=student.getYeaR()%><br/>
-			上传时间：<%=student.getTime()%><br/><br/>
+			<a href="detailexp_stu.action?detail_id=<%=student.getId()%>&stu_id=${sessionScope.value}"><%=student.getExperiment()%></a><br/>
 
 		<%
 			}
 		%>
- 		
+   
 <!--页脚-->
 		<footer>
 			

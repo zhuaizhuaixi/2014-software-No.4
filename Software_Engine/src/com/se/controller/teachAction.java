@@ -103,6 +103,10 @@ public class teachAction extends ActionSupport {
 		pstmt.setDate(4, now);
 		System.out.println(pstmt.toString());
 		pstmt.executeUpdate();
+		
+		sql="UPDATE teaching_programme SET content = REPLACE(content, '\\r\\n', '<br/>')";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.executeUpdate();
 		return SUCCESS;
 	}
 	public String deleteteach() throws SQLException

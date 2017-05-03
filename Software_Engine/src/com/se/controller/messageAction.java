@@ -48,6 +48,15 @@ public class messageAction extends ActionSupport {
 		request.put("messageList", pageBean);// step 3	
 		return SUCCESS;
 	}
+	public String show_stu()
+	{
+		MessageService messageService=new MessageServiceImpl();
+		ActionContext ctx = ActionContext.getContext();
+		Map request = (Map)ctx.get("request");
+		PageBean pageBean = messageService.getMessages(pageNo); // step 2
+		request.put("messageList", pageBean);// step 3	
+		return "stu";
+	}
 	public String submit() throws SQLException
 	{
 		Connection conn = JDBCUtil.getConnection();
@@ -61,5 +70,19 @@ public class messageAction extends ActionSupport {
 		System.out.println(pstmt.toString());
 		pstmt.executeUpdate();
 		return "show";
+	}
+	public String submit_stu() throws SQLException
+	{
+		Connection conn = JDBCUtil.getConnection();
+		String sql = "INSERT INTO message_board(content,author,time) VALUES (?,?,?);";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  msg);
+		pstmt.setInt(2, msgerid);
+		java.util.Date date=new java.util.Date();
+		Timestamp tt=new Timestamp(date.getTime());
+		pstmt.setTimestamp(3, tt);
+		System.out.println(pstmt.toString());
+		pstmt.executeUpdate();
+		return "show_stu";
 	}
 }

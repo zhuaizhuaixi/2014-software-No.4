@@ -1,0 +1,4 @@
+本项目使用tomcat、java、struts。
+使用前需做好配置，并将JDBCUtil中的账号密码改成本机数据库的账号密码，并需要导入根目录下的study-final.sql数据库。
+
+在使用课件上传下载功能时，需先在工程下创建upload文件夹，具体位置需先将showfileAction中的path打印在终端上，然后进入相应路径创建文件夹。

@@ -67,23 +67,38 @@
         	<result name="input">index.jsp</result>
         </action>
         
-        <action name="*exp" class = "com.se.controller.expAction"  method="{1}">
+        <action name="*exp*" class = "com.se.controller.expAction"  method="{1}{2}">
         	<result name="success">Experiment.jsp</result>
         	<result name="show" type="chain">showexp</result>
         	<result name="detail">exp_detail.jsp</result>
+        	<result name="detail_stu">exp_detail_stu.jsp</result>
         	<result name="report">report.jsp</result>
         	<result name="changeexp">changeexp.jsp</result>
+        	<result name="stu_show">Experiment_stu.jsp</result>
         </action>
         
-        <action name="*message" class = "com.se.controller.messageAction"  method="{1}">
+        <action name="*message*" class = "com.se.controller.messageAction"  method="{1}{2}">
         	<result name="success">Message.jsp</result>
+        	<result name="stu">message_stu.jsp</result>
         	<result name="show" type="chain">showmessage</result>
+        	<result name="show_stu" type="chain">showmessage_stu</result>
         </action>
         
-        <action name="*practice" class = "com.se.controller.practiceAction"  method="{1}practice">
+        <action name="*practice*" class = "com.se.controller.practiceAction"  method="{1}practice{2}">
         	<result name="success"  type="chain">practice</result>
+        	<result name="practice_stu">Practice_stu_doing.jsp</result>
         	<result name="input">index.jsp</result>
+        	<result name="stu_result">practice_stu_result.jsp</result>
         </action>
+        
+        <action name="*report" class="com.se.controller.reportAction" method="{1}report">
+        	<result name="report" > report_stu.jsp</result>
+        	<result name="showreport" type="chain">showexp_stu</result>
+        </action>
+        
+         <action name="output" class="com.se.controller.OutAction">   
+            <result>Student.jsp</result>   
+        </action> 
              
           <action name="download" class="com.se.controller.FileDownloadAction">
                <result name="success" type="stream">

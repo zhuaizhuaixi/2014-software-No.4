@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="java.util.List,com.se.domain.teach_prog"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -57,35 +56,31 @@
 			<tr>
     <!--标签栏-->
     <td valign="top" ><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2" style="background-image:url(picture/content-bg.gif)">
-      <tbody><tr>
+     <tbody><tr>
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
         <td height="31" width="130"><div class="titlebt"><a href="index_stu.jsp">首页</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showfile_stu.action">下载课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action"><font color="#00AEAE">查看大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action">查看大纲</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="Practice_stu.jsp">习题训练</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action">教学实验</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action"><font color="#00AEAE">教学实验</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showmessage_stu.action">交流天地</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
       </tr>
     </tbody></table>
     </td>
     </tr>
-    
-    <%
-			List<teach_prog> students =(List<teach_prog>) request.getAttribute("teachList"); //important!
-			for (teach_prog student : students) {
-				
-		%>
-			大纲标题：<%=student.getTitle()%><br/>
-			大纲内容：<br/>
-			<%=student.getContent()%><br/>
-			大纲年份：<%=student.getYeaR()%><br/>
-			上传时间：<%=student.getTime()%><br/><br/>
 
-		<%
-			}
-		%>
- 		
+       <p>提交实验<%=request.getParameter("expid")%>报告</p>
+       <form action="addreport.action" method="post">
+	报告标题<input type="text" name="title" /><br/>
+	报告内容<textarea  rows="16" cols="50"	name="content"></textarea><br/>
+	<input type="hidden" name="stu_id" value= "<%=request.getParameter("stu_id") %>"/>
+	<input type="hidden" name="expid" value= "<%=request.getParameter("expid") %>"/>
+	<input type="submit" value="提交"/>
+	</form>
+
+       
+   
 <!--页脚-->
 		<footer>
 			

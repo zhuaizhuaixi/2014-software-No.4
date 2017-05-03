@@ -29,7 +29,9 @@
 		<!--个人信息-->
 
 
-<p>  欢迎您${sessionScope.username}!</p>
+				<p>  欢迎您${sessionScope.username}!</p>
+               <p>  学号${sessionScope.value}!</p>
+				<p>  <a href="changepw.action?changeid=${sessionScope.value}">修改密码</a></p>
 
 
 		<!--日历-->
@@ -43,10 +45,12 @@
 
 <!--留言板-->
 		<div class="preamble" id="zen-preamble" role="article">
-			<h3>The Road to Enlightenment</h3>
-			<p>Littering a dark and dreary road lay the past relics of browser-specific tags, incompatible <abbr title="Document Object Model">DOM</abbr>s, broken <abbr title="Cascading Style Sheets">CSS</abbr> support, and abandoned browsers.</p>
-			<p>We must clear the mind of the past. Web enlightenment has been achieved thanks to the tireless efforts of folk like the <abbr title="World Wide Web Consortium">W3C</abbr>, <abbr title="Web Standards Project">WaSP</abbr>, and the major browser creators.</p>
-			<p>The CSS Zen Garden invites you to relax and meditate on the important lessons of the masters. Begin to see with clarity. Learn to use the time-honored techniques in new and invigorating fashion. Become one with the web.</p>
+		    
+			<p>友情链接</p>
+			<p><a href="http://www.baidu.com">百度</a></p>
+			<p><a href="http://jwch.fzu.edu.cn">福大教务处</a></p>
+			<p><a href="http://www.fzu.edu.cn">福大官网</a></p>
+			<p><a href="http://yiban.fzu.edu.cn">福大易班</a></p>
 		</div>
 	</section>
 
@@ -58,9 +62,9 @@
       <tbody><tr>
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
                <td height="31" width="130"><div class="titlebt"><a href="index.jsp">首页</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="show.action"><font color="#00AEAE">学生名单</font></a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="show.action">学生名单</font></a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="showfile.action">查看课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="teach.action">教学大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach.action"><font color="#00AEAE">教学大纲</a></div></td>
         <td height="31" width="130"><div class="titlebt"><a href="practice.action">习题问答</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showexp.action">教学实验</a></div></td>
         <td height="31" width="130" ><div class="titlebt" ><a href="showmessage.action">交流天地</a></div></td>
@@ -74,33 +78,23 @@
  	<a href="addteach.jsp" class="button grey">导入新大纲</a>
  	
  	
- 	<table>
-		<tr>
-			<td>大纲编号</td>
-			<td>大纲标题</td>
-			<td>大纲内容</td>
-			<td>大纲年份</td>
-			<td>大纲提交时间</td>
-		</tr>
+
 		<%
 			List<teach_prog> students =(List<teach_prog>) request.getAttribute("teachList"); //important!
 			for (teach_prog student : students) {
 				
 		%>
-		<tr>
-			<td><%=student.getId()%></td>
-			<td><%=student.getTitle()%></td>
-			<td><%=student.getContent()%></td>
-			<td><%=student.getYeaR()%></td>
-			<td><%=student.getTime()%></td>
-			<td> <a	href="deleteteach.action?deleteid=<%=student.getId()%>">删除</a></td>
-		</tr>
+			大纲标题：<%=student.getTitle()%><br/>
+			大纲内容：<br/>
+			<%=student.getContent()%><br/>
+			大纲年份：<%=student.getYeaR()%><br/>
+			上传时间：<%=student.getTime()%><br/>
+			<a	href="deleteteach.action?deleteid=<%=student.getId()%>">删除</a><br/>
 
 		<%
 			}
 		%>
-	</table>
- 	
+
   
 <!--页脚-->
 		<footer>

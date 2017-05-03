@@ -58,12 +58,12 @@
     <td valign="top" ><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2" style="background-image:url(picture/content-bg.gif)">
       <tbody><tr>
       	<td width="17" valign="top"><img src="picture/left-top-right.gif" width="17" height="29"></td>
-        <td height="31" width="130"><div class="titlebt"><a href="index_stu.jsp"><font color="#00AEAE">首页</font></a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="showfile_stu.action">下载课件</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="#">查看大纲</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="#">习题训练</a></div></td>
-        <td height="31" width="130"><div class="titlebt"><a href="#">教学实验</a></div></td>
-        <td height="31" width="130" ><div class="titlebt" ><a href="#">交流天地</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="index_stu.jsp">首页</font></a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="showfile_stu.action"><font color="#00AEAE">下载课件</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="teach_stu.action">查看大纲</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="Practice_stu.jsp">习题训练</a></div></td>
+        <td height="31" width="130"><div class="titlebt"><a href="showexp_stu.action">教学实验</a></div></td>
+        <td height="31" width="130" ><div class="titlebt" ><a href="showmessage_stu.action">交流天地</a></div></td>
          <td width="16" valign="top" ><img src="picture/nav-right-bg.gif" width="0" height="29"></td>
       </tr>
     </tbody></table>
