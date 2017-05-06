@@ -3,7 +3,6 @@
 <%@page import="com.se.util.PageBean"%>
 <%@page import="java.util.List,com.se.domain.Student"%>
 <%@page import="com.se.dao.StudentDaoJDBCImpl"%>
-<%@page import="com.se.dao.StudentDao"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">

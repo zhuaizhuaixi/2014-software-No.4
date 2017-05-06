@@ -10,9 +10,7 @@ import java.text.SimpleDateFormat;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.se.service.MessageService;
 import com.se.service.MessageServiceImpl;
-import com.se.service.StudentService;
 import com.se.service.StudentServiceImpl;
 import com.se.util.JDBCUtil;
 import com.se.util.PageBean;
@@ -41,7 +39,7 @@ public class messageAction extends ActionSupport {
 	}
 	public String show()
 	{
-		MessageService messageService=new MessageServiceImpl();
+		MessageServiceImpl messageService=new MessageServiceImpl();
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		PageBean pageBean = messageService.getMessages(pageNo); // step 2
@@ -50,7 +48,7 @@ public class messageAction extends ActionSupport {
 	}
 	public String show_stu()
 	{
-		MessageService messageService=new MessageServiceImpl();
+		MessageServiceImpl messageService=new MessageServiceImpl();
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		PageBean pageBean = messageService.getMessages(pageNo); // step 2
@@ -59,30 +57,14 @@ public class messageAction extends ActionSupport {
 	}
 	public String submit() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO message_board(content,author,time) VALUES (?,?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,  msg);
-		pstmt.setInt(2, msgerid);
-		java.util.Date date=new java.util.Date();
-		Timestamp tt=new Timestamp(date.getTime());
-		pstmt.setTimestamp(3, tt);
-		System.out.println(pstmt.toString());
-		pstmt.executeUpdate();
+		MessageServiceImpl messer = new MessageServiceImpl();
+		messer.insertmessage(msg, msgerid);
 		return "show";
 	}
 	public String submit_stu() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO message_board(content,author,time) VALUES (?,?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1,  msg);
-		pstmt.setInt(2, msgerid);
-		java.util.Date date=new java.util.Date();
-		Timestamp tt=new Timestamp(date.getTime());
-		pstmt.setTimestamp(3, tt);
-		System.out.println(pstmt.toString());
-		pstmt.executeUpdate();
+		MessageServiceImpl messer = new MessageServiceImpl();
+		messer.insertmessage(msg, msgerid);
 		return "show_stu";
 	}
 }

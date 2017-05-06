@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.se.service.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.se.domain.Student;
@@ -19,6 +20,9 @@ import com.se.util.JDBCUtil;
 public class teachAction extends ActionSupport {
 	private String title;
 	private String content;
+	
+	private TeacherServiceImpl teacherser = new TeacherServiceImpl();
+	
 	public int getDeleteid() {
 		return deleteid;
 	}
@@ -48,19 +52,7 @@ public class teachAction extends ActionSupport {
 	public String teach_stu() throws SQLException
 	{
 		List funds = new ArrayList<teach_prog>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from teaching_programme";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			teach_prog fund = new teach_prog();
-			fund.setId(rs.getInt("id"));
-			fund.setTitle(rs.getString("title"));
-			fund.setContent(rs.getString("content"));
-			fund.setYeaR(rs.getInt("year"));
-			fund.setTime(rs.getDate("time"));
-			funds.add(fund);
-		}
+		funds=teacherser.teach();
 		
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
@@ -71,19 +63,7 @@ public class teachAction extends ActionSupport {
 	public String teach() throws SQLException
 	{
 		List funds = new ArrayList<teach_prog>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from teaching_programme";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			teach_prog fund = new teach_prog();
-			fund.setId(rs.getInt("id"));
-			fund.setTitle(rs.getString("title"));
-			fund.setContent(rs.getString("content"));
-			fund.setYeaR(rs.getInt("year"));
-			fund.setTime(rs.getDate("time"));
-			funds.add(fund);
-		}
+		funds=teacherser.teach();
 		
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");

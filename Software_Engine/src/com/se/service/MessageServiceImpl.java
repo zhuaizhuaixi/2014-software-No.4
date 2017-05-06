@@ -1,12 +1,14 @@
 package com.se.service;
 
-import com.se.dao.MessageDao;
+
+import java.sql.SQLException;
+
 import com.se.dao.MessageDaoJDBCImpl;
 import com.se.util.PageBean;
 
-public class MessageServiceImpl implements MessageService {
-	private MessageDao messageDao=new MessageDaoJDBCImpl();
-	@Override
+public class MessageServiceImpl  {
+	private MessageDaoJDBCImpl messageDao=new MessageDaoJDBCImpl();
+	
 	public PageBean getMessages(int pageNo) {
 		// TODO Auto-generated method stub
 		PageBean pageBean=new PageBean();
@@ -17,4 +19,9 @@ public class MessageServiceImpl implements MessageService {
 		return pageBean;
 	}
 
+	public void insertmessage(String msg,int msgerid) throws SQLException
+	{
+		System.out.println(msg+msgerid);
+		messageDao.submit(msg, msgerid);
+	}
 }

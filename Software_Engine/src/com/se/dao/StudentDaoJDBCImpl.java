@@ -13,13 +13,8 @@ import java.sql.SQLException;
 import com.se.domain.Student;
 import com.se.util.JDBCUtil;
 
-/**
- * Description: TODO
- * 
- * @author
- * @date 2017骞�2鏈�25鏃� 涓嬪崍3:05:25
- */
-public class StudentDaoJDBCImpl implements StudentDao {
+
+public class StudentDaoJDBCImpl  {
 	private Connection conn = null;
 	private ResultSet rs = null;
 	private PreparedStatement pstmt = null;
@@ -51,7 +46,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
 		return funds;
 	}
 
-	@Override
+	
 	public void insert(Student fund) {
 		try {
 			conn = JDBCUtil.getConnection();
@@ -73,7 +68,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
 		}
 	}
 
-	@Override
+	
 	public void delete(int fundNo) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
@@ -94,25 +89,9 @@ public class StudentDaoJDBCImpl implements StudentDao {
 		}
 	}
 
-	@Override
-	public void update(Student fund) {
-		try {
-			conn = JDBCUtil.getConnection();
-			String sql = "update student set password=? where id=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, fund.getPassword());
-			pstmt.setString(2, fund.getId());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			//throw new DAOException(e.getMessage(), e);
-		} finally {
-			JDBCUtil.close(null, pstmt, conn);
-		}
-	}
+	
 
-	@Override
+	
 	public Student findById(int fundNo) {
 		// TODO Auto-generated method stub
 		Student fund = null;
@@ -140,7 +119,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
 		return fund;
 	}
 
-	@Override
+	
 	public List findByPage(int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
 		List funds = new ArrayList<Student>();
@@ -172,7 +151,7 @@ public class StudentDaoJDBCImpl implements StudentDao {
 		return funds;
 	}
 
-	@Override
+	
 	public int findRowCount() {
 		int count=0;
 		// TODO Auto-generated method stub

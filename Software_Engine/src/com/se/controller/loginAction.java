@@ -45,7 +45,7 @@ public class loginAction extends ActionSupport {
 		//2. 鍒涘缓dao鎴栬�卻ervice瀵硅薄
 		if(radio.compareTo("on")==0)
 			radio="student";
-		UserDao userDao=new UserDaoJDBCImpl();
+		UserDaoJDBCImpl userDao=new UserDaoJDBCImpl();
 		boolean flag=userDao.validate(username, password,radio);
 		System.out.println(username+password+radio);
 		

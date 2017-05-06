@@ -9,17 +9,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.se.domain.message;
 import com.se.util.JDBCUtil;
 
 
-public class MessageDaoJDBCImpl implements MessageDao {
+public class MessageDaoJDBCImpl  {
 	private Connection conn = null;
 	private ResultSet rs = null;
 	private PreparedStatement pstmt = null;
 
-	@Override
+	
 	public List findByPage(int pageNo, int pageSize) {
 		// TODO Auto-generated method stub
 		List funds = new ArrayList<message>();
@@ -49,7 +50,7 @@ public class MessageDaoJDBCImpl implements MessageDao {
 		return funds;
 	}
 
-	@Override
+	
 	public int findRowCount() {
 		int count=0;
 		// TODO Auto-generated method stub
@@ -71,5 +72,18 @@ public class MessageDaoJDBCImpl implements MessageDao {
 		return count;
 	}
 
+	public void submit(String msg,int msgerid) throws SQLException
+	{
+		conn = JDBCUtil.getConnection();
+		String sql = "INSERT INTO message_board(content,author,time) VALUES (?,?,?)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1,  msg);
+		pstmt.setInt(2, msgerid);
+		java.util.Date date=new java.util.Date();
+		Timestamp tt=new Timestamp(date.getTime());
+		pstmt.setTimestamp(3, tt);
+		System.out.println(pstmt.toString());
+		pstmt.executeUpdate();
+	}
 
 }

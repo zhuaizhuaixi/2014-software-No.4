@@ -3,7 +3,7 @@
 <%@page import="com.se.util.PageBean"%>
 <%@page import="java.util.List,com.se.domain.message"%>
 <%@page import="com.se.dao.MessageDaoJDBCImpl"%>
-<%@page import="com.se.dao.MessageDao,java.sql.*"%>
+<%@page import="java.sql.*"%>
 <html lang="en">
 <head>
 	<meta charset="utf-8">

@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 import com.se.util.JDBCUtil;
 
-public class UserDaoJDBCImpl implements UserDao {
+public class UserDaoJDBCImpl  {
 	private Connection conn=null;
 	private PreparedStatement pstmt=null;
 	private ResultSet rs=null;
-	@Override
+	
 	public boolean validate(String userName, String password,String radio) {
 		// TODO Auto-generated method stub
 		boolean flag=false;

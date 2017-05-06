@@ -9,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.se.service.FileServiceImpl;
 
 public class FileDownloadAction extends ActionSupport{
     InputStream fileInputStream;
@@ -17,25 +18,8 @@ public class FileDownloadAction extends ActionSupport{
 
 	public String execute() throws UnsupportedEncodingException
     {
-    	String path=ServletActionContext.getServletContext().getRealPath("\\upload\\");
-    	
-    	
-    	String str;                           //鑾峰彇鏂囦欢澶逛腑鏂囦欢鍚嶇殑鏁扮粍
-    	  File file2=new File(path);
-		  String[] filelist = new String[100];
-		  File[] tempList = file2.listFiles();
-		  System.out.println("共有"+tempList.length);
-		  for (int i = 0; i < tempList.length; i++) {
-		   if (tempList[i].isFile()) {
-			   str=tempList[i].toString();
-			   str=str.replace(path+"\\", "");
-			   filelist[i]=str;
-		    System.out.println("是"+str);
-		   }
-		  }
-    	
-		  File file=new File(path+"\\"+filelist[Integer.parseInt(fileName)]);
-    	System.out.println(path+"\\"+filelist[Integer.parseInt(fileName)]);
+		FileServiceImpl fileser = new FileServiceImpl();
+		  File file=fileser.download(fileInputStream, fileName);
      	fileName=file.getName();
     	ServletActionContext.getResponse().setHeader("Content-Disposition","attachment;fileName="+java.net.URLEncoder.encode(fileName, "UTF-8"));
    	try {

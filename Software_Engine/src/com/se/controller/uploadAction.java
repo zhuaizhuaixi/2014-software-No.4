@@ -48,7 +48,7 @@ public class uploadAction extends ActionSupport {
 	public String upload() throws Exception
 	{
 		FileOutputStream fos=new FileOutputStream(ServletActionContext.getServletContext().getRealPath(savePath)+"\\"+getUploadFileName());
-		FileInputStream fis = new FileInputStream(getUpload());
+		FileInputStream fis = new FileInputStream(upload);
 		byte [] buffer = new byte[1024];
 		int len=0;
 //		System.out.println(ServletActionContext.getServletContext().getRealPath(savePath));

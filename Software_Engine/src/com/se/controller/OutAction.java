@@ -14,7 +14,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.se.dao.StudentDao;
 import com.se.dao.StudentDaoJDBCImpl;
 import com.se.domain.Student;
 
@@ -27,7 +26,7 @@ public class OutAction extends ActionSupport implements ServletResponseAware {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	private StudentDao studentDao=new StudentDaoJDBCImpl();
+	private StudentDaoJDBCImpl studentDao=new StudentDaoJDBCImpl();
     private String format = "xls";   
     private HttpServletResponse response;   
     private String fileName;  
@@ -45,28 +44,28 @@ public class OutAction extends ActionSupport implements ServletResponseAware {
         }   
         return null;   
     }     
-    /** ÉèÖÃÏìÓ¦Í·*/   
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Í·*/   
     public void setResponseHeader(){   
         try{   
-//          response.setContentType("application/msexcel;charset=UTF-8");  //Á½ÖÖ·½·¨¶¼¿ÉÒÔ   
+//          response.setContentType("application/msexcel;charset=UTF-8");  //ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   
             response.setContentType("application/octet-stream;charset=iso-8859-1");   
             response.setHeader("Content-Disposition", "attachment;filename="   
                     +java.net.URLEncoder.encode(this.fileName, "UTF-8"));   
-            //¿Í»§¶Ë²»»º´æ   
+            //ï¿½Í»ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½   
             response.addHeader("Pargam", "no-cache");   
             response.addHeader("Cache-Control", "no-cache");   
         }catch(Exception ex){   
             ex.printStackTrace();   
         }   
     }     
-    /**µ¼³öÊý¾Ý*/   
+    /**ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/   
     private void exportExcel(OutputStream os) throws IOException{   
         Workbook book = new HSSFWorkbook();   
-        Sheet sheet = book.createSheet("µ¼³öÐÅÏ¢");   
+        Sheet sheet = book.createSheet("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢");   
         Row row = sheet.createRow(0);   
-        row.createCell(0).setCellValue("Ñ§ºÅ");   
-        row.createCell(1).setCellValue("ÐÕÃû");   
-        row.createCell(2).setCellValue("ÐÔ±ð");       
+        row.createCell(0).setCellValue("Ñ§ï¿½ï¿½");   
+        row.createCell(1).setCellValue("ï¿½ï¿½ï¿½ï¿½");   
+        row.createCell(2).setCellValue("ï¿½Ô±ï¿½");       
         CellStyle sty = book.createCellStyle();   
         List<Student> list = studentDao.findAll();   
         for (int i = 1; i < list.size(); i++) {   
@@ -85,7 +84,7 @@ public class OutAction extends ActionSupport implements ServletResponseAware {
     
     public void setFormat(String format) {   
         this.format = format;   
-        this.fileName = "Ñ§Éú»¨Ãû²á.xls";   
+        this.fileName = "Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.xls";   
     }   
     
     public String getFormat() {   
@@ -98,7 +97,7 @@ public class OutAction extends ActionSupport implements ServletResponseAware {
     public void setFileName(String fileName) {   
         this.fileName = fileName;   
     }   
-    /**¼Ç×¡Ò»¶¨ÓÐ¸ÃÊôÐÔµÄset·½·¨*/   
+    /**ï¿½ï¿½×¡Ò»ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½Ôµï¿½setï¿½ï¿½ï¿½ï¿½*/   
     public void setServletResponse(HttpServletResponse response) {   
         this.response = response;   
     }   
