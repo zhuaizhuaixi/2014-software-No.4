@@ -16,6 +16,10 @@ public class showfileAction extends ActionSupport {
 		ActionContext ctx = ActionContext.getContext();
 		Map request=(Map)ctx.get("request");
 		String path=ServletActionContext.getServletContext().getRealPath("\\upload\\");
+		
+		if(!new File(path).exists())   {
+		    new File(path).mkdirs();
+		  }
 		  File file=new File(path);
 		  String[] filelist = new String[100];
 		  File[] tempList = file.listFiles();
@@ -28,7 +32,6 @@ public class showfileAction extends ActionSupport {
 		    System.out.println("在"+str);
 		   }
 		  }
-		  System.out.println(path);
 		  request.put("list",filelist);
 		System.out.println(path);
 		  
@@ -41,6 +44,9 @@ public class showfileAction extends ActionSupport {
 		ActionContext ctx = ActionContext.getContext();
 		Map request=(Map)ctx.get("request");
 		String path=ServletActionContext.getServletContext().getRealPath("\\upload\\");
+		if(!new File(path).exists())   {
+		    new File(path).mkdirs();
+		  }
 		  File file=new File(path);
 		  String[] filelist = new String[100];
 		  File[] tempList = file.listFiles();
@@ -55,8 +61,6 @@ public class showfileAction extends ActionSupport {
 		  }
 		  System.out.println(path);
 		  request.put("list",filelist);
-		System.out.println(path);
-		  
 		  return "stu";
 	}
 	public showfileAction() {

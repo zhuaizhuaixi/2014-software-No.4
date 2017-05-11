@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import com.se.dao.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.se.domain.*;
@@ -15,6 +15,7 @@ import com.se.util.JDBCUtil;
 
 public class expAction extends ActionSupport {
 	private int expid;
+	private ExperimentDaoJDBCImpl expdao= new ExperimentDaoJDBCImpl();
 	public int getExpid() {
 		return expid;
 	}
@@ -78,17 +79,7 @@ public class expAction extends ActionSupport {
 	public String show() throws SQLException
 	{
 		List funds = new ArrayList<experiment>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from experiment";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			experiment fund = new experiment();
-			fund.setId(rs.getInt("id"));
-			fund.setExperiment(rs.getString("experiment"));
-			fund.setRequires(rs.getString("requires"));
-			funds.add(fund);
-		}
+		funds=expdao.show();
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("expList", funds);// step 3
@@ -98,17 +89,7 @@ public class expAction extends ActionSupport {
 	public String show_stu() throws SQLException
 	{
 		List funds = new ArrayList<experiment>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from experiment";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			experiment fund = new experiment();
-			fund.setId(rs.getInt("id"));
-			fund.setExperiment(rs.getString("experiment"));
-			fund.setRequires(rs.getString("requires"));
-			funds.add(fund);
-		}
+		funds=expdao.show();
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("expList", funds);// step 3
@@ -117,74 +98,34 @@ public class expAction extends ActionSupport {
 	
 	public String detail() throws SQLException
 	{
-		String expname="";
-		String expreq="";
 		List funds = new ArrayList<exp_report>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select report.id,student.name,report.title,report.score from student,report,experiment where experiment.id=report.expid and report.student=student.id and experiment.id=?;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, detail_id);
-		System.out.println(pstmt.toString());
-		ResultSet rs = pstmt.executeQuery();
-		while(rs.next())
-		{
-			exp_report fund = new exp_report();
-			fund.setId(rs.getInt("id"));
-			fund.setName(rs.getString("name"));
-			fund.setTitle(rs.getString("title"));
-			fund.setScore(rs.getInt("score"));
-			funds.add(fund);
-		}
-		sql="select experiment,requires from experiment where id=?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, detail_id);
-		rs = pstmt.executeQuery();
-		while(rs.next())
-		{
-			expname=rs.getString("experiment");
-			expreq=rs.getString("requires");
-		}
+		funds=expdao.getreport(detail_id);
+		
+		
+		String [] exp = new String [2];
+		exp=expdao.getrequire(detail_id);
+		
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("id", detail_id);
 		request.put("detailList", funds);// step 3
-		request.put("experiment", expname);
-		request.put("requires",expreq);	
+		request.put("experiment", exp[0]);
+		request.put("requires",exp[1]);	
 		return "detail";
 	}
 	
 	public String detail_stu() throws SQLException
 	{
-		String expname="";
-		String expreq="";
-		int flag=0;
-		Connection conn = JDBCUtil.getConnection();
-		String sql ;
-		PreparedStatement pstmt ;
-		ResultSet rs ;
-		sql="select experiment,requires from experiment where id=?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, detail_id);
-		rs = pstmt.executeQuery();
-		while(rs.next())
-		{
-			expname=rs.getString("experiment");
-			expreq=rs.getString("requires");
-		}
+		String [] exp = new String [2];
+		exp=expdao.getrequire(detail_id);
 		
-		sql="select * from report where student=? and expid=?";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, stu_id);
-		pstmt.setInt(2, detail_id);
-		rs = pstmt.executeQuery();
-		if(rs.next())
-			flag=1;
+		int flag= expdao.issubmit(stu_id, detail_id);
 		
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("id", detail_id);
-		request.put("experiment", expname);
-		request.put("requires",expreq);	
+		request.put("experiment", exp[0]);
+		request.put("requires",exp[1]);	
 		request.put("flag", flag);
 		return "detail_stu";
 	}
@@ -192,33 +133,13 @@ public class expAction extends ActionSupport {
 	
 	public String add() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "insert into experiment(experiment,requires) values (?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, experiment);
-		pstmt.setString(2, requires);
-		System.out.print(pstmt.toString());
-		pstmt.executeUpdate();
+		expdao.addexp(experiment, requires);
 		return "show";
 	}
 	public String report() throws SQLException
 	{
 		List funds = new ArrayList<report>();
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from report where id=?;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, reportid);
-		ResultSet rs = pstmt.executeQuery();
-		while(rs.next())
-		{
-			report r=new report();
-			r.setId(reportid);
-			r.setTime(rs.getDate("time"));
-			r.setTitle(rs.getString("title"));
-			r.setContent(rs.getString("content"));
-			r.setScore(rs.getInt("score"));
-			funds.add(r);
-		}
+		funds=expdao.report(reportid);
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("reportList",funds);
@@ -227,29 +148,15 @@ public class expAction extends ActionSupport {
 	
 	public String mark() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "update report set score = ? where id=?;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, mark);
-		pstmt.setInt(2, reportid);
-		System.out.print(pstmt.toString());
-		pstmt.executeUpdate();
+		expdao.mark(mark, reportid);
 		return "show";
 	}
+	
 	public String change() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select experiment,requires from experiment where id=?";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, expid);
-		ResultSet rs = pstmt.executeQuery();
-		experiment exp=new experiment();
-		while(rs.next())
-		{	
-			exp.setId(expid);
-			exp.setExperiment(rs.getString("experiment"));
-			exp.setRequires(rs.getString("requires"));
-		}
+		
+		experiment exp=expdao.getchange(expid);
+		
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("exp",exp);
@@ -257,14 +164,7 @@ public class expAction extends ActionSupport {
 	}
 	public String update() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "update experiment set experiment = ? , requires=?  where id=?;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, experiment);
-		pstmt.setString(2, requires);
-		pstmt.setInt(3, expid);
-		System.out.print(pstmt.toString());
-		pstmt.executeUpdate();
+		expdao.update(experiment, requires, expid);
 		return "show";
 	}
 }

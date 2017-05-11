@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="2014-software-No.4">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/Software_Engine/src"/>
+        <property name="context-root" value="2014-software-No.4"/>
+        <property name="java-output-path" value="/2014-software-No.4/Software_Engine/build/classes"/>
+    </wb-module>
+</project-modules>

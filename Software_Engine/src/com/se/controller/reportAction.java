@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import com.se.dao.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.se.domain.report;
 import com.se.util.JDBCUtil;
 
 public class reportAction extends ActionSupport {
+	private ReportDaoJDBCImpl reportdao = new ReportDaoJDBCImpl();
 	private int stu_id;
 	private int expid;
 	private String title;
@@ -45,21 +46,7 @@ public class reportAction extends ActionSupport {
 	}
 	public String show_report() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "select * from report where student=? and expid=? ;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, stu_id);
-		pstmt.setInt(2, expid);
-		ResultSet rs = pstmt.executeQuery();
-		report r=new report();
-		while(rs.next())
-		{
-			r.setId(rs.getInt("id"));
-			r.setTime(rs.getDate("time"));
-			r.setTitle(rs.getString("title"));
-			r.setContent(rs.getString("content"));
-			r.setScore(rs.getInt("score"));
-		}
+		report r=reportdao.getreport(stu_id, expid);
 		ActionContext ctx = ActionContext.getContext();
 		Map request = (Map)ctx.get("request");
 		request.put("report",r);
@@ -69,22 +56,7 @@ public class reportAction extends ActionSupport {
 	
 	public String addreport() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO report(student,title,content,score,expid,time) VALUES (?,?,?,?,?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, stu_id);
-		pstmt.setString(2, title);
-		pstmt.setString(3, content);
-		pstmt.setDouble(4, -1);
-		pstmt.setInt(5, expid);
-		Date now = new Date(System.currentTimeMillis()); 
-		pstmt.setDate(6, now);
-		System.out.println(pstmt.toString());
-		pstmt.executeUpdate();
-		
-		sql="UPDATE report SET content = REPLACE(content, '\\r\\n', '<br/>')";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.executeUpdate();
+		reportdao.submit(stu_id, title, content, expid);
 		return "showreport";
 	}
 	

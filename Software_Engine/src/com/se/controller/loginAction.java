@@ -49,23 +49,14 @@ public class loginAction extends ActionSupport {
 		boolean flag=userDao.validate(username, password,radio);
 		System.out.println(username+password+radio);
 		
-		String name="";
-		int id=0;
+		String[] inf = new String [2];
 		
 		if(flag)
 		{
-			Connection conn = JDBCUtil.getConnection();
-			String sql = "select * from "+radio+" where id=?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, username);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next())
-			{
-				name=rs.getString("name");
-				id=rs.getInt("id");
-			}
-			ctx.getSession().put("username", name);
-			ctx.getSession().put("value",id);
+			inf=userDao.getpeople(username, radio);
+			userDao.logintime(radio, Integer.parseInt(username));
+			ctx.getSession().put("username", inf[0]);
+			ctx.getSession().put("value",Integer.parseInt(inf[1]));
 			if(radio.compareTo("student")==0)
 				return "student";
 			else
@@ -74,8 +65,12 @@ public class loginAction extends ActionSupport {
 		else
 			return "input";
 	}
-	public loginAction() {
-		
+	public String loginout() {
+		ActionContext context = ActionContext.getContext();
+		context.getSession().remove("username");
+		context.getSession().remove("value");
+
+		return "login";
 	}
 
 }

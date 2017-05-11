@@ -1,4 +1,4 @@
-package com.se.dao;
+package com.se.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

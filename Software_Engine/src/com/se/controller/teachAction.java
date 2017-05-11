@@ -16,12 +16,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.se.domain.Student;
 import com.se.domain.teach_prog;
 import com.se.util.JDBCUtil;
+import com.se.dao.*;
 
 public class teachAction extends ActionSupport {
 	private String title;
 	private String content;
 	
 	private TeacherServiceImpl teacherser = new TeacherServiceImpl();
+	private TeacherDaoJDBCImpl teacherdao= new TeacherDaoJDBCImpl();
 	
 	public int getDeleteid() {
 		return deleteid;
@@ -73,29 +75,12 @@ public class teachAction extends ActionSupport {
 	
 	public String addteach() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "INSERT INTO teaching_programme(title,content,year,time) VALUES (?,?,?,?);";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, title);
-		pstmt.setString(2, content);
-		pstmt.setInt(3, year);
-		Date now = new Date(System.currentTimeMillis()); 
-		pstmt.setDate(4, now);
-		System.out.println(pstmt.toString());
-		pstmt.executeUpdate();
-		
-		sql="UPDATE teaching_programme SET content = REPLACE(content, '\\r\\n', '<br/>')";
-		pstmt = conn.prepareStatement(sql);
-		pstmt.executeUpdate();
+		teacherdao.add(title, content, year);
 		return SUCCESS;
 	}
 	public String deleteteach() throws SQLException
 	{
-		Connection conn = JDBCUtil.getConnection();
-		String sql = "delete from  teaching_programme where id=?;";
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, deleteid);
-		pstmt.executeUpdate();
+		teacherdao.delete(deleteid);
 		return SUCCESS;
 	}
 }
